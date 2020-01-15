@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="Anthor" content="冖於忄" />
+        <title>冖於忄</title>
+        <style>
+            *{ margin:0; padding:0;font-family:"Microsoft yahei",serif;}
+            li{ list-style-type: none;}
+            #box{
+                position: relative;
+                width:70%;
+                /*height:300px;*/
+                left:0;
+                right:0;
+                /*border: #ea2243;*/
+                margin:5px auto;
+            }
+            #box_1{
+                width: 400px;
+                float: left;
+                /*border: 1px solid #9e9845;*/
+            }
+            #write{
+                position: relative;
+                width: 60%;
+                height: 300px;
+                /*border: 1px solid #16ff18;*/
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                padding-top: 20px;
+            }
+            .formdiv{
+                float: left;
+            }
+            .formdiv_text{
+                display: inline-block;
+            }
+            .form-control{
+                resize: none;
+            }
+            #liuyankuaiall{
+                float: left;
+                width: 250px;
+                padding-bottom: 5px;
+                /*border: 1px solid #991012;*/
+                border-top: 3px solid #ff51db;
+                border-left: 3px solid #e29292;
+            }
+            .liuyankuai{
+                /*border-bottom: 1px solid #ff7669;*/
+                padding-bottom: 10px;
+                /*border: #25e8ea;*/
+                margin-bottom: 10px;
+            }
+            a{
+                color: #272329;
+                transition: 0.6s;
+                text-decoration: none;
+            }
+            /*a:hover{*/
+            /*    color: #ff928d;*/
+            /*}*/
+            .outspan{
+                position: absolute;
+                width: 300px;
+                height: 34px;
+                border-radius: 7px;
+                left: -61px;
+                top: 270px;
+                line-height: 2;
+                text-align: center;
+                font-size: 1rem;
+                color: #b5aeb5;
+                transition: 0.6s;
+                opacity: 1;
+            }
+            .display{
+                opacity: 0;
+                transition: 0.6s;
+
+            }
+            .displarnone{
+                display: none;
+            }
+            #truespan{
+                background-color: #43ffa0;
+            }
+            #falsespan{
+                background-color: #ff6069;
+            }
+            #navdiv{
+                display: flex;
+                flex-wrap: wrap;
+                float: left;
+                width:89%;
+                height:30px;
+                justify-content: center;
+                align-items: center;
+                /*border: 1px solid red;*/
+                margin-top: 10px;
+            }
+            #navdiv li{
+                width: 30px;
+                height: 30px;
+                /*color: #13221c;*/
+                text-align: center;
+                line-height: 30px;
+                font-size: 17px;
+                font-weight: bold;
+                margin: 0 1px;
+                box-shadow: 0 0 4px 0 #7d9eab;
+                border-radius: 4px;
+                border: 2px solid #90b0af;
+                background-color: #ffffff;
+                transition: .3s;
+            }
+            #navdiv li:hover{
+                background-color: #4cdca4;
+            }
+            #navdiv li:hover a{
+                color: #ff5b5d;
+            }
+            #navdiv .active{
+                background-color: #4cdca4;
+            }
+            #navdiv .active a{
+                color: #ff5b5d;
+            }
+            .shanchuclass:hover a{
+                color: #ff613b;
+            }
+        </style>
+        <script>
+            
+        </script>
+    </head>
+    <body>
+        <div id="box">
+            <div id="box_1">
+                <div id="write">
+                    <form>
+                        <div class="formdiv">
+                            <label for="xingming">姓名:--</label>
+                            <div class="formdiv_text">
+                                <input type="text" name="xingming" id="xingming"/>
+                            </div>
+                        </div>
+                        <div class="formdiv">
+                            <label for="liuyan">留言:--</label>
+                            <div class="formdiv_text">
+                                <textarea class="form-control" rows="8" cols="30" name="liuyan" id="liuyan"></textarea>
+                            </div>
+                        </div>
+                        <div class="formdiv">
+                            <button id="tijiao" type="button" class="btn btn-success">提交</button>
+                        </div>
+                    </form>
+                    <div id="truespan" class="outspan display displarnone">留言成功提交!!!!!</div>
+                    <div id="falsespan" class="outspan display displarnone">留言提交失败!请重新输入!!!</div>
+                </div>
+                <nav>
+                    <ul id="navdiv">
+                        <%for (var i = 1; i <= count; i++) {%>
+                            <li class="navbtn" data-page="<%=i%>"><a href="#"><%=i%> </a></li>
+                        <%}%>
+                    </ul>
+                </nav>
+            </div>
+            <div id="liuyankuaiall">
+                    <ul id="lllyyy">
+
+                    </ul>
+                </div>
+        </div>
+    </body>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/underscore-noflect.js"></script>
+    <script type="text/template" id="moban">
+        <li>
+            <div class="liuyankuai">
+                <p>【姓名】{{= xingming }}</p>
+                <p>【留言】{{= liuyan }}</p>
+                <p>【时间】{{= timesj }}</p>
+                <p class="shanchuclass"><a href="/shanchu?id={{=deshan}}" >【--删除信息--】</a></p>
+            </div>
+        </li>
+    </script>
+    <script type="text/javascript">
+        var dd=new Date();
+        var y=dd.getFullYear();
+        var mont=dd.getMonth()+1;
+        var date=dd.getDate();
+        var h=dd.getHours();
+        var m=dd.getMinutes();
+        var s=dd.getSeconds();
+        var nowtimes=y+"_"+mont+"_"+date+"_"+h+"_"+m+"_"+s;
+        var navbtn=document.getElementsByClassName("navbtn");
+        var textly=document.getElementById("lllyyy");
+        var navindex=0;
+        navbtn[0].classList.add("active");
+        for (var i = 0; i < navbtn.length; i++) {
+            (function(i){
+                navbtn[i].onclick=function () {
+                    navindex !==i &&change(i);
+                }
+            })(i);
+        }
+        function change(i){
+            navbtn[navindex].classList.remove("active");
+            navindex=i;
+            navbtn[i].classList.add("active");
+            var page=navbtn[i].getAttribute("data-page")-1;
+            // var page=parseInt($(".navbtn"[i]).attr("data-page")-1);
+            // console.log(page);
+            $("#lllyyy").html("");
+            getdata( page);
+        }
+        getdata(0);
+        //Ajax请求数据
+        function getdata( page){
+            $.get("/du?page="+page,function (result) {
+                var compiled = _.template($("#moban").html());
+                $("#lllyyy").html("");
+                for (var i = 0; i < result.result.length; i++) {
+                    var html=compiled({
+                        liuyan: result.result[i].liuyan,
+                        xingming: result.result[i].xingming,
+                        timesj: result.result[i].timesj,
+                        deshan:result.result[i]._id
+                    });
+                    $("#lllyyy").append($(html));
+                }
+
+            })
+        }
+        //Ajax提交表单
+        $("#tijiao").click(function () {
+            $.post("/tijiao",
+                {
+                    "xingming":$("#xingming").val(),
+                    "liuyan":$("#liuyan").val(),
+                    "timesj":nowtimes
+                },
+                function (result) {
+                //console.log(result);艹
+                    //成功
+                if (result.stats==="1"){
+                    //console.log(":fff");displarnone
+                    document.getElementById("truespan").classList.remove("display");
+                    document.getElementById("truespan").classList.remove("displarnone");
+                    setTimeout(function () {
+                        document.getElementById("truespan").classList.add("display");
+                        setTimeout(function () {
+                            document.getElementById("truespan").classList.add("displarnone");
+                        },1000)
+                    },2000);
+
+                    var compiled = _.template($("#moban").html());
+                    var html=compiled({
+                        liuyan: $("#liuyan").val(),
+                        xingming:$("#xingming").val(),
+                        timesj: nowtimes,
+                        deshan:result.id
+                    });
+                    // $("#lllyyy").append($(html));
+                    $("#lllyyy").prepend($(html));
+                    var lllyyylastchild=textly.lastElementChild;
+                    textly.removeChild(lllyyylastchild);
+                }else if(result.stats==="-1"){
+                    document.getElementById("falsespan").classList.remove("display");
+                    document.getElementById("falsespan").classList.remove("displarnone");
+                    setTimeout(function () {
+                        document.getElementById("falsespan").classList.add("display");
+                        setTimeout(function () {
+                            document.getElementById("falsespan").classList.add("displarnone");
+                        },1000)
+                    },2000);
+                }
+                }
+            );
+        });
+        var truelogin="<%=truelogin%>";
+        alert(truelogin);
+    </script>
+
+</html>

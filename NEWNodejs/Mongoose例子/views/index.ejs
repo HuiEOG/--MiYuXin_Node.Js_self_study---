@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="Anthor" content="冖於忄" />
+        <title>冖於忄</title>
+        <style>
+            *{ margin:0; padding:0;font-family:"Microsoft yahei",serif;}
+            li{ list-style-type: none;}
+            #add{
+                position:absolute;
+                width:300px;
+                height:100px;
+                line-height: 100px;
+                left:0;
+                right:0;
+                margin:20px auto;
+                border-radius: 10px;
+                color: #207195;
+                text-align: center;
+                font-size: 30px;
+                font-style: italic;
+                font-weight: bold;
+                border:1px solid #2fae7f;
+                background-color: #eb8b72;
+                cursor: pointer;
+                transition: 0.6s;
+            }
+            #add:hover{
+                background-color: #72c3eb;
+                color: #d44d4d;
+                border: 1px solid #db5656;
+            }
+            #showall{
+                position:absolute;
+                width:300px;
+                left:0;
+                right:0;
+                top:150px;
+                margin:20px auto;
+                /*border:1px solid red;*/
+            }
+            .list{
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 5px;
+                border: 1px solid #e18787;
+                border-radius: 10px;
+                font-size: 15px;
+                font-weight: bold;
+                background-color: #92d7e3;
+                color: #ff3c41;
+            }
+            a{
+                color: #4454a5;
+                text-decoration: none;
+            }
+        </style>
+        <script src="/js/jquery-1.11.3.min.js"></script>
+    </head>
+    <body>
+        <div id="add">
+            增加图书界面
+        </div>
+        <div id="showall">
+            <%for(var i=0;i<tushu.length;i++){%>
+            <div class="list">
+                <p>书名:<%=tushu[i].bookname%></p>
+                <p>作者:<%=tushu[i].author%></p>
+                <p>价格:<%=tushu[i].price%></p>
+                <a href="/updatebook?bookname=<%=tushu[i].bookname%>">修改</a>
+            </div>
+            <%}%>
+        </div>
+    </body>
+    <script>
+        $("#add").click(function () {
+           window.location="addbook";
+        });
+    </script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

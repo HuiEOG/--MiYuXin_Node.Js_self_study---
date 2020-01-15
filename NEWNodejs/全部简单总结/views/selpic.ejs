@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A basic demo of Cropper.">
+    <meta name="keywords" content="HTML, CSS, JS, JavaScript, jQuery plugin, image cropping, front-end, frontend, web development">
+    <meta name="author" content="Fengyuan Chen">
+    <title>Cropper</title>
+    <style>
+        *{ margin:0; padding:0;font-family:"Microsoft yahei",serif;}
+        li{ list-style-type: none;}
+        #toudiv{
+            width:600px;
+            height:300px;
+            border: 1px solid darkred;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+<div id="toudiv">
+    <form action="/selecut" method="post"  enctype="multipart/form-data">
+        <input name="touxiang" type="file" id="touxiang">
+        <button type="submit" name="tijiao">提交</button>
+        <img src="/userimg/<%=pic%>" id="inimg" style="width: 500px;height:240px;margin:10px;"/>
+    </form>
+</div>
+</body>
+<script type="text/javascript">
+    // $("#inimg").width;
+    // var kk=document.getElementById("touxiang");
+    // var iiww=document.getElementById("inimg");
+    // var ww=iiww.style.width;
+    // var kki=kk.clientWidth;
+    // console.log(kki);
+    // console.log(ww);
+</script>
+</html>

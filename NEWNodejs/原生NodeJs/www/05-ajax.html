@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="Anthor" content="冖於忄" />
+        <title>冖於忄</title>
+        <style>
+            *{ margin:0; padding:0;font-family:"Microsoft yahei",serif;}
+            li{ list-style-type: none;}
+            #box{ }
+        </style>
+        <script src="ajax.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <div id="box">
+            用户：<input type="text" id="user"><br>
+            密码：<input type="password" id="password"><br>
+            <input type="submit" value="注册" id="reg">
+            <input type="submit" value="登录" id="login">
+        </div>
+    </body>
+    <script>
+        var ouser=document.getElementById('user'),
+            opass=document.getElementById('password'),
+            oreg=document.getElementById('reg'),
+            ologin=document.getElementById('login');
+
+        oreg.onclick=function () {
+            //注册
+            ajax({
+                type:'get',
+                url:'/user',
+                data:{act:'reg',user:ouser.value,pass:opass.value},
+                success:function (str) {
+                    var json=eval('('+str+')');
+                    if (json.ok){
+                        alert(json.msg);
+                    }else{
+                        alert('注册失败,'+json.msg);
+                    }
+                },
+                error:function () {
+                    alert('通信错误!!');
+                }
+            });
+        };
+
+        ologin.onclick=function () {
+            //登录
+            ajax({
+                type:'get',
+                url:'/user',
+                data:{act:'login',user:ouser.value,pass:opass.value},
+                success:function (str) {
+                    var json=eval('('+str+')');
+                    if (json.ok){
+                        alert(json.msg);
+                    }else{
+                        alert('登录失败,'+json.msg);
+                    }
+                },
+                error:function () {
+                    alert('通信错误!!');
+                }
+            });
+        };
+    </script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

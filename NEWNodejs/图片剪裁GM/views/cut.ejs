@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A basic demo of Cropper.">
+    <meta name="keywords" content="HTML, CSS, JS, JavaScript, jQuery plugin, image cropping, front-end, frontend, web development">
+    <meta name="author" content="Fengyuan Chen">
+    <title>Cropper</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/cropper.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .container{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<!-- Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <!-- <h3 class="page-header">Demo:</h3> -->
+            <div class="img-container">
+                <img src="/uploadimg/<%=avthor%>" alt="Picture">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <!-- <h3 class="page-header">Preview:</h3> -->
+            <div class="docs-preview clearfix">
+                <div class="img-preview preview-lg"></div>
+            </div>
+
+            <!-- <h3 class="page-header">Data:</h3> -->
+            <div class="docs-data">
+                <div class="input-group">
+                    <label class="input-group-addon" for="dataX">X</label>
+                    <input class="form-control" id="dataX" type="text" placeholder="x">
+                    <span class="input-group-addon">px</span>
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" for="dataY">Y</label>
+                    <input class="form-control" id="dataY" type="text" placeholder="y">
+                    <span class="input-group-addon">px</span>
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" for="dataWidth">Width</label>
+                    <input class="form-control" id="dataWidth" type="text" placeholder="width">
+                    <span class="input-group-addon">px</span>
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" for="dataHeight">Height</label>
+                    <input class="form-control" id="dataHeight" type="text" placeholder="height">
+                    <span class="input-group-addon">px</span>
+                </div>
+                <div class="input-group">
+                    <label class="input-group-addon" for="dataRotate">Rotate</label>
+                    <input class="form-control" id="dataRotate" type="text" placeholder="rotate">
+                    <span class="input-group-addon">deg</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9 docs-buttons">
+            <!-- Show the cropped image in modal -->
+            <div class="modal fade docs-cropped" id="getCroppedCanvasModal" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" role="dialog" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal" type="button" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="getCroppedCanvasTitle">Cropped</h4>
+                        </div>
+                        <div class="modal-body"></div>
+                        <!-- <div class="modal-footer">
+                          <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
+                        </div> -->
+                    </div>
+                </div>
+            </div><!-- /.modal -->
+
+            <button class="btn btn-primary" data-method="getData" data-option="" data-target="#putData" type="button" id="getdata00">
+          <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getData&quot;)">
+            Get Data
+          </span>
+            </button>
+            <input class="form-control" id="putData" type="text" placeholder="--信息在此显示--">
+
+        </div><!-- /.docs-buttons -->
+
+        <div class="col-md-3 docs-toggles">
+            <!-- <h3 class="page-header">Toggles:</h3> -->
+            <div class="btn-group btn-group-justified" data-toggle="buttons">
+                <label class="btn btn-primary active" data-method="setAspectRatio" data-option="1.7777777777777777" title="Set Aspect Ratio">
+                    <input class="sr-only" id="aspestRatio1" name="aspestRatio" value="1.7777777777777777" type="radio">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 16 / 9)">
+              16:9
+            </span>
+                </label>
+                <label class="btn btn-primary" data-method="setAspectRatio" data-option="1.3333333333333333" title="Set Aspect Ratio">
+                    <input class="sr-only" id="aspestRatio2" name="aspestRatio" value="1.3333333333333333" type="radio">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 4 / 3)">
+              4:3
+            </span>
+                </label>
+                <label class="btn btn-primary" data-method="setAspectRatio" data-option="1" title="Set Aspect Ratio">
+                    <input class="sr-only" id="aspestRatio3" name="aspestRatio" value="1" type="radio">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 1 / 1)">
+              1:1
+            </span>
+                </label>
+                <label class="btn btn-primary" data-method="setAspectRatio" data-option="0.6666666666666666" title="Set Aspect Ratio">
+                    <input class="sr-only" id="aspestRatio4" name="aspestRatio" value="0.6666666666666666" type="radio">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, 2 / 3)">
+              2:3
+            </span>
+                </label>
+                <label class="btn btn-primary" data-method="setAspectRatio" data-option="NaN" title="Set Aspect Ratio">
+                    <input class="sr-only" id="aspestRatio5" name="aspestRatio" value="NaN" type="radio">
+                    <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, NaN)">
+              Free
+            </span>
+                </label>
+            </div>
+        </div><!-- /.docs-toggles -->
+    </div>
+</div>
+
+<!-- Alert -->
+<div class="docs-alert"><span class="warning message"></span></div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/cropper.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">
+    $().cropper({
+        built: function () {
+            $().cropper('zoomable', false);
+        }
+    });
+    $('#getdata00').click(function () {
+        //console.log(getvalue);
+        setTimeout(function () {
+            var getvalue=JSON.parse($('#putData').val());
+            var x=Math.ceil(getvalue.x);
+            var y=Math.ceil(getvalue.y);
+            var width=Math.ceil(getvalue.width);
+            var height=Math.ceil(getvalue.height);
+            // console.log(getvalue);
+            // console.log(getvalue.x);
+            // console.log(x+"|"+y+"|"+width+"|"+height);
+            //alert(getvalue);
+            $.get("/docut",{
+                "x":x,
+                "y":y,
+                "w":width,
+                "h":height
+            },function (result){
+                if (result==="-1"){
+                    alert("剪裁失败!!请重新选择图片!!");
+                    window.location="/";
+                }else{
+                    //alert("剪裁失败!!请重新选择图片!!");
+                    window.location="/";
+                }
+            })
+        },100);
+    });
+    // inputImage
+
+</script>
+</body>
+</html>

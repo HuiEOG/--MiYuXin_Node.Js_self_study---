@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>成功登陆</title>
+    <style>
+        h1{
+            position: absolute;
+            left:0;
+            right:0;
+            margin: 0 auto;
+            font-size: 30px;
+            color: #ff4d54;
+            width: 265px;
+        }
+
+    </style>
+</head>
+<body>
+<h1><%=truelogin%></h1>
+</body>
+<script type="text/javascript">
+    var stats="<%=stats%>";
+    if (stats==="666"){
+        setTimeout(function () {
+            window.location.href="/";
+        },2000);
+    }else if (stats==="777"){
+        setTimeout(function () {
+            window.location.href="/login";
+        },2000);
+    }else if (stats==="233"){
+        setTimeout(function () {
+            window.location.href="/login";
+        },2000);
+    }
+</script>
+</html>

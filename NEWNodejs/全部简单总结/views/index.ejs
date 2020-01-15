@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A basic demo of Cropper.">
+    <meta name="keywords" content="HTML, CSS, JS, JavaScript, jQuery plugin, image cropping, front-end, frontend, web development">
+    <meta name="author" content="Fengyuan Chen">
+    <title>Cropper</title>
+    <style>
+        *{ margin:0; padding:0;font-family:"Microsoft yahei",serif;}
+        li{ list-style-type: none;}
+        #toudiv{
+            position: relative;
+            width:600px;
+            height:300px;
+            border: 1px solid darkred;
+            margin: 0 auto;
+        }
+        #avatar{
+            position: absolute;
+            left: 300px;
+            top: 10px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 1px solid #09b982;
+            transition: 0.6s;
+        }
+        #avatar:hover{
+            transform: scale(1.04);
+            border: 1px solid #b90006;
+            box-shadow: 0 0 5px 2px red;
+        }
+        #outlogin{
+            text-decoration: none;
+            border: 1px solid #54d591;
+        }
+        #chatview{
+            width: 600px;
+            margin: 10px auto;
+        }
+        .msg {
+            display: inline-block;
+            width: 100%;
+            border-bottom: 1px solid crimson;
+            margin: 5px auto;
+        }
+        .msg_user{
+            width: 81px;
+            word-wrap: break-word;
+            float: left;
+            margin: 0 5px;
+        }
+        .msg_talk{
+            width: 83%;
+            float: right;
+            word-wrap: break-word;
+        }
+        #chatmsg{
+            position: absolute;
+            bottom: 5px;
+            width: 360px;
+            height: 30px;
+            line-height: 32px;
+            text-indent: 10px;
+            outline: none;
+            border-radius: 5px;
+            border: 2px solid #ed9f9f;
+        }
+        #sendchat{
+            position: absolute;
+            bottom: 10px;
+            right: 100px;
+            width: 60px;
+            height: 27px;
+            font-weight: bold;
+            font-size: 17px;
+            color: #02857e;
+            border-radius: 5px;
+            outline: none;
+            border: 1px solid #eb8a8a;
+            background-color: #f57075;
+            transition: 0.6s;
+        }
+        #sendchat:hover{
+            color: #d97171;
+            border: 1px solid #7cd5d2;
+            background-color: #91e5d3;
+        }
+        #sendchat:active{
+            border: 1px solid #ff4d54;
+            background-color: #65af9d;
+        }
+    </style>
+</head>
+
+<body>
+<div id="toudiv">
+    <p>欢迎 __ <span id="thisuser"><%=user%></span>__进入本网站</p>
+    <a href="/outlogin" id="outlogin">退出登录</a>
+    <a href="/selpic"><img src="/userimg/<%=avatar%>" id="avatar" title="更改图片"/></a>
+    <input type="text" name="chatmsg" id="chatmsg">
+    <button id="sendchat" name="发送">发送</button>
+</div>
+<div id="chatview">
+    <ul id="chatview_ul">
+
+    </ul>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+//chattalk
+var socket=io();
+var Otext=document.getElementById("chatmsg"),
+    Otoo=document.getElementById("sendchat");
+Otext.onkeydown=function (event){
+    //console.log(event);
+    var e=event||window.event;
+    if(e.keyCode === 13){
+        chatsend();
+    }
+};
+Otoo.onclick= chatsend;
+function chatsend(){
+    socket.emit("chattalk",{
+        "chattext":Otext.value,
+        "chatuser":$("#thisuser").html()
+    });
+    //Otext.value
+}
+socket.on("chattalk",function (msg) {
+    $("#chatview_ul").prepend("<li class=\"msg\"><p class=\"msg_user\">"+msg.chatuser+"</p>:&nbsp;<p class=\"msg_talk\">"+msg.chattext+"</p></li>");
+    Otext.value="";
+});
+</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="Anthor" content="冖於忄" />
+        <title>冖於忄</title>
+        <style>
+            *{ margin:0; padding:0;font-family:"Microsoft yahei",serif;}
+            li{ list-style-type: none;}
+            #box{ }
+        </style>
+        <script src="ajax.js"></script>
+    </head>
+    <body>
+        <div id="box">
+                <a id="onaa" href="http://localhost:9091">发送数据</a>
+                <input type="submit" value="注册" id="ona">
+        </div>
+    </body>
+
+    <script>
+        var Oa=document.getElementById('ona');
+
+        Oa.onclick=function () {
+            console.log('sss');
+            ajax({
+                type:'get',
+                url:'/user',
+                data:{act:'user'},
+                // dataType:"json",
+                // jsonp:"callback",
+                // jsoncallback:"suc_json",
+                success:function (str) {
+                    var json=eval('('+str+')');
+                    if (json.ok){
+                        alert(json.msg);
+                    }else{
+                        alert('收到数据,'+json.msg);
+                    }
+                },
+                error:function () {
+                    alert('通信错误!!');
+                }
+            });
+        }
+    </script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

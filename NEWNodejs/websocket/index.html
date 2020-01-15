@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="Anthor" content="冖於忄" />
+        <title>冖於忄</title>
+        <style>
+            *{ margin:0; padding:0;font-family:"Microsoft yahei",serif;}
+            li{ list-style-type: none;}
+            #box{ }
+        </style>
+        <script>
+            
+        </script>
+    </head>
+    <body>
+        <div id="box">
+            <input type="text" value="" id="text" width="400"/>
+            <input type="button" value="发送信息" id="too"/>
+        </div>
+    </body>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+    var socket=io();
+    var Otext=document.getElementById("text"),
+        Otoo=document.getElementById("too");
+    Otoo.onclick=function(){
+        socket.emit("emitto",Otext.value);
+        //Otext.value
+    };
+
+    socket.on("onin",function (msg) {
+        console.log(msg);
+    });
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
